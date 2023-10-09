@@ -6,14 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Phone
@@ -55,15 +53,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun BusinessCard(modifier: Modifier = Modifier) {
-    Box(
+    Column(
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .background(colorResource(R.color.background_green))
-            .verticalScroll(rememberScrollState())
+            .background(colorResource(id = R.color.background_green))
     ) {
+        Spacer(Modifier)
         Column(
             modifier = Modifier
-                .align(Alignment.Center)
-                .padding(start = 32.dp, end = 32.dp),
+                .padding(32.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -74,7 +73,6 @@ fun BusinessCard(modifier: Modifier = Modifier) {
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
-//                    .fillMaxWidth(0.4F)
                     .size(96.dp)
                     .background(colorResource(id = R.color.logo_bg_grey))
                     .padding(8.dp)
@@ -96,8 +94,7 @@ fun BusinessCard(modifier: Modifier = Modifier) {
 
         Column(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 32.dp, top = 360.dp)
+                .padding(bottom = 32.dp)
         ) {
             BottomInfoRow(
                 Icons.Default.Phone,

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Art Space</string>
+    <string name="horses_in_a_meadow_title">Horses in a Meadow</string>
+    <string name="horses_in_a_meadow_artist">Edgar Degas</string>
+    <string name="horses_in_a_meadow_year">1871</string>
+    <string name="leisure_and_labor_title">Leisure and Labor</string>
+    <string name="leisure_and_labor_artist">Frank Blackwell Mayer</string>
+    <string name="leisure_and_labor_year">1858</string>
+    <string name="the_trap_title">The Trap</string>
+    <string name="the_trap_artist">Henri de Toulouse-Lautrec</string>
+    <string name="the_trap_year">1880</string>
+    <string name="the_last_of_the_buffalo_title">The Last of the Buffalo</string>
+    <string name="the_last_of_the_buffalo_artist">Albert Bierstadt</string>
+    <string name="the_last_of_the_buffalo_year">1888-1889</string>
+    <string name="crossing_the_james_river_title">Crossing the James River</string>
+    <string name="crossing_the_james_river_artist">British 19th Century</string>
+    <string name="crossing_the_james_river_year">1878</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+</resources>

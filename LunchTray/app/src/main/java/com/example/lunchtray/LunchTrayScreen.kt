@@ -135,7 +135,9 @@ fun LunchTrayApp() {
                     onStartOrderButtonClicked = {
                         navController.navigate(LunchTrayScreen.EntreeMenu.name)
                     },
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
                 )
             }
             composable(route = LunchTrayScreen.EntreeMenu.name) {
@@ -146,7 +148,9 @@ fun LunchTrayApp() {
                         navController.navigate(LunchTrayScreen.SideDishMenu.name)
                     },
                     onSelectionChanged = viewModel::updateEntree,
-                    modifier = Modifier.verticalScroll(rememberScrollState())
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .padding(innerPadding)
                 )
             }
             composable(route = LunchTrayScreen.SideDishMenu.name) {
@@ -157,7 +161,9 @@ fun LunchTrayApp() {
                         navController.navigate(LunchTrayScreen.AccompanimentMenu.name)
                     },
                     onSelectionChanged = viewModel::updateSideDish,
-                    modifier = Modifier.verticalScroll(rememberScrollState())
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .padding(innerPadding)
                 )
             }
             composable(route = LunchTrayScreen.AccompanimentMenu.name) {
@@ -168,7 +174,9 @@ fun LunchTrayApp() {
                         navController.navigate(LunchTrayScreen.Checkout.name)
                     },
                     onSelectionChanged = viewModel::updateAccompaniment,
-                    modifier = Modifier.verticalScroll(rememberScrollState())
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .padding(innerPadding)
                 )
             }
             composable(route = LunchTrayScreen.Checkout.name) {
@@ -178,7 +186,9 @@ fun LunchTrayApp() {
                         navController.navigate(LunchTrayScreen.Start.name)
                     },
                     onCancelButtonClicked = ::onCancelButtonClicked,
-                    modifier = Modifier.verticalScroll(rememberScrollState())
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .padding(innerPadding)
                 )
             }
         }

@@ -14,9 +14,6 @@ import com.example.cupcake.R
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class CupcakeScreenNavigationTest {
     @get:Rule
@@ -128,12 +125,4 @@ class CupcakeScreenNavigationTest {
         val backText = composeTestRule.activity.getString(R.string.back_button)
         composeTestRule.onNodeWithContentDescription(backText).performClick()
     }
-
-    private fun getFormattedDate(): String {
-        val calendar = Calendar.getInstance()
-        calendar.add(java.util.Calendar.DATE, 1)
-        val formatter = SimpleDateFormat("E MMM d", Locale.getDefault())
-        return formatter.format(calendar.time)
-    }
-
 }

@@ -15,33 +15,129 @@
  */
 package com.example.lunchtray
 
+import androidx.annotation.StringRes
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.example.lunchtray.ui.OrderViewModel
+import com.example.lunchtray.ui.StartOrderScreen
+import com.example.lunchtray.ui.theme.LunchTrayTheme
 
 // TODO: Screen enum
+enum class LunchTrayScreen(
+    @StringRes val titleId : Int
+) {
+    Start(R.string.app_name),
+    EntreeMenu(R.string.choose_entree),
+    SideDishMenu(R.string.choose_side_dish),
+    AccompanimentMenu(R.string.choose_accompaniment),
+    Checkout(R.string.order_checkout)
+}
 
-// TODO: AppBar
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LunchTrayAppBar(
+    currentScreen: LunchTrayScreen,
+    canNavigateBack: Boolean,
+    navigateUp: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    CenterAlignedTopAppBar(
+        title = {
+            Box(Modifier.fillMaxHeight(), contentAlignment = Alignment.Center) {
+                Text(stringResource(id = currentScreen.titleId))
+            }
+        },
+        modifier = modifier
+            .height(56.dp)
+            .padding(8.dp)
+            .border(2.dp, Color.Red, RoundedCornerShape(100f)),
+        navigationIcon = {
+            if (canNavigateBack) {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.back_button)
+                    )
+                }
+            }
+        }
+    )
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LunchTrayApp() {
-    // TODO: Create Controller and initialization
-
     // Create ViewModel
     val viewModel: OrderViewModel = viewModel()
+    val navController: NavHostController = rememberNavController()
+
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentScreen = LunchTrayScreen.valueOf(
+        backStackEntry?.destination?.route ?: LunchTrayScreen.Start.name
+    )
 
     Scaffold(
         topBar = {
-            // TODO: AppBar
+            LunchTrayAppBar(
+                currentScreen = currentScreen,
+                canNavigateBack = navController.previousBackStackEntry != null,
+                navigateUp = navController::navigateUp
+            )
         }
     ) { innerPadding ->
         val uiState by viewModel.uiState.collectAsState()
 
         // TODO: Navigation host
+        NavHost(
+            navController = navController,
+            startDestination = LunchTrayScreen.Start.name,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable(route = LunchTrayScreen.Start.name) {
+                StartOrderScreen(
+                    onStartOrderButtonClicked = { /*TODO*/ },
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LunchTrayAppPreview() {
+    LunchTrayTheme {
+        LunchTrayApp()
     }
 }

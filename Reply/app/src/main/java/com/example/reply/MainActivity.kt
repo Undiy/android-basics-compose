@@ -37,7 +37,10 @@ class MainActivity : ComponentActivity() {
             ReplyTheme {
                 Surface {
                     val windowSize = calculateWindowSizeClass(this)
-                    ReplyApp(windowSize = windowSize.widthSizeClass)
+
+                    ReplyApp(
+                        windowSize = windowSize.widthSizeClass,
+                    )
                 }
             }
         }
@@ -49,7 +52,9 @@ class MainActivity : ComponentActivity() {
 fun ReplyAppCompactPreview() {
     ReplyTheme {
         Surface {
-            ReplyApp(windowSize = WindowWidthSizeClass.Compact)
+            ReplyApp(
+                windowSize = WindowWidthSizeClass.Compact,
+            )
         }
     }
 }

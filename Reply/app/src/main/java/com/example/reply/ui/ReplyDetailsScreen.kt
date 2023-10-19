@@ -52,7 +52,7 @@ import com.example.reply.data.MailboxType
 fun ReplyDetailsScreen(
     replyUiState: ReplyUiState,
     onBackPressed: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     BackHandler {
         onBackPressed()

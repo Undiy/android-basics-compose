@@ -43,8 +43,37 @@ fun HomeScreen(
         is MarsUiState.Success -> ResultScreen(
             marsUiState.photos, modifier = modifier.fillMaxWidth()
         )
-        is MarsUiState.Error -> ErrorScreen( modifier = modifier.fillMaxSize())
 
+        is MarsUiState.Error -> ErrorScreen( modifier = modifier.fillMaxSize())
+    }
+}
+
+/**
+ * The home screen displaying the loading message.
+ */
+@Composable
+fun LoadingScreen(modifier: Modifier = Modifier) {
+    Image(
+        modifier = modifier.size(200.dp),
+        painter = painterResource(R.drawable.loading_img),
+        contentDescription = stringResource(R.string.loading)
+    )
+}
+
+/**
+ * The home screen displaying error message with re-attempt button.
+ */
+@Composable
+fun ErrorScreen(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = ""
+        )
+        Text(text = stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
     }
 }
 
@@ -61,34 +90,26 @@ fun ResultScreen(photos: String, modifier: Modifier = Modifier) {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun LoadingScreen(modifier: Modifier = Modifier) {
-    Image(
-        modifier = modifier.size(200.dp),
-        painter = painterResource(R.drawable.loading_img),
-        contentDescription = stringResource(R.string.loading)
-    )
-}
-
-@Composable
-fun ErrorScreen(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = ""
-        )
-        Text(text = stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
+fun LoadingScreenPreview() {
+    MarsPhotosTheme {
+        LoadingScreen()
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun ErrorScreenPreview() {
+    MarsPhotosTheme {
+        ErrorScreen()
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
-fun ResultScreenPreview() {
+fun PhotosGridScreenPreview() {
     MarsPhotosTheme {
-        ResultScreen(stringResource(R.string.placeholder_result))
+        ResultScreen(stringResource(R.string.placeholder_success))
     }
 }

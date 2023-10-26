@@ -50,8 +50,7 @@ fun MarsPhotosApp() {
                 .padding(it)
         ) {
             val marsViewModel: MarsViewModel = viewModel()
-            HomeScreen(
-                marsUiState = marsViewModel.marsUiState)
+            HomeScreen(marsUiState = marsViewModel.marsUiState)
         }
     }
 }

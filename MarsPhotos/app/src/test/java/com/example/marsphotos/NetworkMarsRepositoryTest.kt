@@ -15,15 +15,21 @@
  */
 package com.example.marsphotos
 
-import android.app.Application
-import com.example.marsphotos.data.AppContainer
-import com.example.marsphotos.data.DefaultAppContainer
+import com.example.marsphotos.data.NetworkMarsPhotosRepository
+import com.example.marsphotos.fake.FakeDataSource
+import com.example.marsphotos.fake.FakeMarsApiService
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
-class MarsPhotosApplication : Application() {
-    /** AppContainer instance used by the rest of classes to obtain dependencies */
-    lateinit var container: AppContainer
-    override fun onCreate() {
-        super.onCreate()
-        container = DefaultAppContainer()
-    }
+class NetworkMarsRepositoryTest {
+
+    @Test
+    fun networkMarsPhotosRepository_getMarsPhotos_verifyPhotoList() =
+        runTest {
+            val repository = NetworkMarsPhotosRepository(
+                marsApiService = FakeMarsApiService()
+            )
+            assertEquals(FakeDataSource.photosList, repository.getMarsPhotos())
+        }
 }

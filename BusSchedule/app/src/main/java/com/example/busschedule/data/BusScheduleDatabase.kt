@@ -17,7 +17,7 @@ abstract class BusScheduleDatabase : RoomDatabase() {
             // if the Instance is not null, return it, otherwise create a new database instance.
             return Instance ?: synchronized(this) {
                 Room.databaseBuilder(context, BusScheduleDatabase::class.java, "bus_schedule")
-                    .createFromAsset("assets/database/bus_schedule.db")
+                    .createFromAsset("database/bus_schedule.db")
                     .build().also { Instance = it }
             }
         }

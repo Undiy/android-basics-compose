@@ -60,6 +60,7 @@ fun ItemEntryScreen(
     canNavigateBack: Boolean = true,
     viewModel: ItemEntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    val coroutineScope = rememberCoroutineScope()
     Scaffold(
         topBar = {
             InventoryTopAppBar(
@@ -69,8 +70,6 @@ fun ItemEntryScreen(
             )
         }
     ) { innerPadding ->
-        val coroutineScope = rememberCoroutineScope()
-
         ItemEntryBody(
             itemUiState = viewModel.itemUiState,
             onItemValueChange = viewModel::updateUiState,
@@ -110,7 +109,7 @@ fun ItemEntryBody(
             shape = MaterialTheme.shapes.small,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = stringResource(R.string.save_action))
+            Text(stringResource(R.string.save_action))
         }
     }
 }

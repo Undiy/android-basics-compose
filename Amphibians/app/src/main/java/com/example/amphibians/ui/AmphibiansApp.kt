@@ -29,7 +29,9 @@ fun AmphibiansApp(
         },
         modifier = modifier
     ) {
-        val amphibiansViewModel: AmphibiansViewModel = viewModel()
+        val amphibiansViewModel: AmphibiansViewModel = viewModel(
+            factory = AmphibiansViewModel.Factory
+        )
         AmphibiansHomeScreen(
             amphibiansUiState = amphibiansViewModel.amphibiansUiState,
             retryAction = amphibiansViewModel::getAmphibians,

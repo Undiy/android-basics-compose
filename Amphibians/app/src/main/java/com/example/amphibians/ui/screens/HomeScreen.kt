@@ -58,7 +58,7 @@ fun AmphibiansListScreen(
     LazyColumn(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(16.dp)
+        contentPadding = PaddingValues(top = 4.dp, bottom = 4.dp, start = 16.dp, end = 16.dp)
     ) {
         items(items = amphibians, key = Amphibian::name) { amphibian ->
             AmphibianCard(

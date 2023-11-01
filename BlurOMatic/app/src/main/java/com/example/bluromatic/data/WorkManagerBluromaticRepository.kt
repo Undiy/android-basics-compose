@@ -47,12 +47,12 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
         // Add WorkRequest to Cleanup temporary images
         var continuation = workManager.beginWith(OneTimeWorkRequest.from(CleanupWorker::class.java))
 
-        // Create WorkRequest to blur the image
+        // Add WorkRequest to blur the image
         val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
 
+        // Input the Uri for the blur operation along with the blur level
         blurBuilder.setInputData(createInputDataForWorkRequest(blurLevel, imageUri))
 
-        // Add the blur work request to the chain
         continuation = continuation.then(blurBuilder.build())
 
         // Add WorkRequest to save the image to the filesystem
@@ -60,7 +60,7 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
             .build()
         continuation = continuation.then(save)
 
-        // Start the work
+        // Actually start the work
         continuation.enqueue()
     }
 

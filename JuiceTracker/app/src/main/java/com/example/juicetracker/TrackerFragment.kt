@@ -24,6 +24,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.juicetracker.databinding.FragmentTrackerBinding
 import com.example.juicetracker.ui.AppViewModelProvider
@@ -59,7 +60,7 @@ class TrackerFragment : Fragment() {
         binding.recyclerView.adapter = adapter
 
         binding.fab.setOnClickListener { fabView ->
-            findNavController().navigate(
+            fabView.findNavController().navigate(
                 TrackerFragmentDirections.actionTrackerFragmentToEntryDialogFragment()
             )
         }
